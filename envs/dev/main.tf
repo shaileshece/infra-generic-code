@@ -14,18 +14,14 @@ module "subnet" {
   subnets    = var.subnets
 }
 module "network_interface" {
-  depends_on = [module.virtual_network]
-  source     = "../../child modules/azurerm_network_interface"
-  nics       = var.nics
-    subnet_ids= module.subnet.subnet_id
+  depends_on   = [module.virtual_network, module.subnet, module.public_ip]
+  source       = "../../child modules/azurerm_network_interface"
+  nics         = var.nics
+  subnet_id_op = module.subnet.subnet_id_op
+  pip_id       = module.public_ip.pip_id
 }
 module "public_ip" {
   depends_on = [module.resource_group]
   source     = "../../child modules/azurerm_public_ip"
   pips       = var.pips
 }
-# module "linux_virtual_machine" {
-#   source                = "../../child modules/azurerm_virtual_machine"
-#   vms                   = var.vms
-#   network_interface_ids = [module.network_interface.id["nic1"]]
-# }

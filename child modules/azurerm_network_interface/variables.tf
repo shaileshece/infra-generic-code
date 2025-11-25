@@ -4,14 +4,18 @@ variable "nics" {
     nic-name            = string
     nic-location        = string
     resource_group_name = string
-    subnet-name         = string
-    vnet-name           = string
-    pip_name           = string
-
     ip_configurations = list(object({
       ipconfigname                  = string
-      subnet_ids                    = string
+      subnet_key                  = string
       private_ip_address_allocation = string
+      public_ip_key = string
     }))
   }))
+}
+variable "subnet_id_op" {
+
+}
+
+variable "pip_id" {
+  
 }

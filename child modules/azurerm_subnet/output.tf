@@ -1,5 +1,5 @@
-output "subnet_id" {
+output "subnet_id_op" {
     value = {
-       for k, v in azurerm_subnet.subnet1 : k => v.id
+        for k, v in azurerm_subnet.subnet-lev1 : k => v.id   
     }
 }
